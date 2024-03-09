@@ -88,7 +88,7 @@ class GenerateToken(BaseCommannd):
   def reglas_bloqueo(self,session, email):
      try:
         resultados = session.query(LogSesion).\
-        filter_by(email=email, codigo_sesion='NotAuthorizedException').\
+        filter_by(email=email).\
         order_by(LogSesion.createdAt.desc()).\
         limit(3).\
         all()
