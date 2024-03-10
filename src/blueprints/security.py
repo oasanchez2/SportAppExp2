@@ -45,11 +45,6 @@ def show():
 def ping():
     return 'pong'
 
-@security_blueprint.route('/users/reset', methods = ['POST'])
-def reset():
-    Reset().execute()
-    return jsonify({'status': 'OK'})
-
 @security_blueprint.route('/users/verify_mfa', methods = ['POST'])
 def verify_mfa():
     user = VerifyMfa(request.get_json()).execute()
@@ -60,6 +55,10 @@ def response_mfa_challenge():
     user = ResponseMfaChallenge(request.get_json()).execute()
     return jsonify(user)
 
+@security_blueprint.route('/users/reset', methods = ['POST'])
+def reset():
+    Reset().execute()
+    return jsonify({'status': 'OK'})
 
 def auth_token():
     if 'Authorization' in request.headers:
